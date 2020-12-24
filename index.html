@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="node_modules/aframe/dist/aframe-master.js"></script>
+    <script src="node_modules/aframe-extras/dist/aframe-extras.js"></script>
+    <script src="node_modules/aframe-orbit-controls/dist/aframe-orbit-controls.js"></script>
+    <!-- <script src="node_modules/aframe-inspector/dist/aframe-inspector.js"></script> -->
+    <script>
+      AFRAME.registerPrimitive("a-cgrid", {
+        defaultComponents: {
+          geometry: {
+            primitive: "plane",
+            width: 256,
+            height: 256,
+          },
+          rotation: { x: -90, y: 0, z: 0 },
+          material: {
+            src: "url(grid.png)",
+            repeat: "64 64",
+          },
+        },
+        mappings: {
+          width: "geometry.width",
+          height: "geometry.height",
+          src: "material.src",
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      id="scene"
+      vr-mode-ui="enabled: true"
+      debug="false"
+    >
+      <a-entity
+        camera
+        orbit-controls="
+        target: 0 0.1 -2;
+        minDistance: 0.5;
+        maxDistance: 180;
+        initialPosition: 0 12 30;
+        maxPolarAngle: 75;
+        minPolarAngle: 25;
+        zoomSpeed: 2;
+        enableDamping: true;
+        dampingFactor: 0.05
+        "
+      ></a-entity>
+      <a-cgrid></a-cgrid>
+      <a-plane
+        position="0 0.1 0"
+        rotation="-90 0 0"
+        width="10"
+        height="10"
+        src="url(Hiro_marker.png)"
+        color="#ffffff"
+      ></a-plane>
+      <a-sky color="#ffffff"></a-sky>
+    </a-scene>
+    <script src="script.js"></script>
+  </body>
+</html>
